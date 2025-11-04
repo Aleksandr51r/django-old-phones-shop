@@ -1,0 +1,6 @@
+{% extends 'base.html' %} {% block content %}
+<h2 class="u-accent">Profile</h2>
+<form action="{% url 'users:logout' %}">
+    <button type="submit" class="button--thridth">Logout</button>
+</form>
+{% endblock %}

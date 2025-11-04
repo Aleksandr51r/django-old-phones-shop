@@ -1,0 +1,569 @@
+@import  "normalize.scss"
+@import  "resets.scss"
+@import  "filter-form-styles.sass"
+@import  "login.sass"
+
+@font-face 
+    font-family: "Montserrat"
+    src: url("../fonts/Montserrat-Regular.ttf")
+    font-weight: regular
+    font-style: normal
+
+@font-face 
+    font-family: "Montserrat"
+    src: url("../fonts/Montserrat-SemiBold.ttf")
+    font-weight: bold
+    font-style: normal
+
+
+$shadow: #0A0A0A
+$shadow-item: #141414
+$midthones: #292929
+$highlight: #028e7a 
+$accent:   #FFD740
+$font-color-primary: aliceblue
+
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
+a 
+    text-decoration: none
+    color: $font-color-primary
+html
+    font-family: "Montserrat"
+    font-size: 16px
+    color: $font-color-primary  
+    background-color: $midthones
+    background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='100' height='100' patternTransform='scale(5) rotate(175)'><rect x='0' y='0' width='100%' height='100%' fill='%23292929ff'/><path d='M19.95-15.33L18.32-.68 16.7 13.97l13.5-5.92 13.5-5.91L31.82-6.6zM62 68.18l21.15-23.32 9.62 29.98zm2.64-.85l26.08 5.64-8.15-25.4zm-44.7 17.42l-1.63 14.64-1.63 14.66 13.5-5.92 13.5-5.92-11.87-8.73z'  stroke-width='1' stroke='none' fill='%231a1a1aff'/><path d='M96.78 82.3a3.74 3.74 0 104.93-5.65 3.74 3.74 0 00-5.3.37 3.76 3.76 0 00.37 5.28zm-47.2-69.69l3.44-.23-.23-3.45-3.44.24zm-3.37 45.7a1.5 1.5 0 002.1-.15 1.5 1.5 0 00-.14-2.1 1.5 1.5 0 00-2.1.15 1.5 1.5 0 00.14 2.1zm24.66-45.06A8.5 8.5 0 1082.07.43a8.5 8.5 0 10-11.2 12.82zM-3.3 82.3a3.74 3.74 0 104.93-5.65 3.74 3.74 0 00-5.29.37 3.76 3.76 0 00.36 5.28zm74.17 31.03a8.5 8.5 0 1011.2-12.82 8.5 8.5 0 10-11.2 12.82zm6.34-78.02c-2.44.5-5.05-.5-7.13-2.7-.28-.3-.43-.68-.41-1.1a1.5 1.5 0 011.56-1.46c.4 0 .78.17 1.06.47 1.37 1.45 2.9 2.1 4.33 1.8 1.41-.28 2.58-1.47 3.28-3.35 1.06-2.84 3.08-4.77 5.52-5.26 2.44-.5 5.05.5 7.13 2.7.54.57.56 1.43.06 2.02l-.12.13c-.6.57-1.57.54-2.14-.07-1.37-1.45-2.9-2.1-4.32-1.8-1.42.28-2.6 1.47-3.29 3.35-.92 2.46-2.54 4.22-4.55 4.97-.32.14-.64.24-.98.3zm8.64-9.5c1.73-.34 3.56.4 5.15 2.08a.63.63 0 00.94-.03c.2-.24.2-.6-.03-.83-1.87-1.98-4.17-2.87-6.3-2.43-2.14.43-3.91 2.15-4.86 4.7-.82 2.17-2.22 3.55-3.95 3.91-1.73.35-3.56-.38-5.15-2.07a.62.62 0 00-1.08.41c-.01.17.05.32.17.45 1.87 1.98 4.17 2.87 6.3 2.43 2.14-.43 3.91-2.15 4.87-4.7.7-1.89 1.85-3.18 3.28-3.72.2-.08.43-.15.66-.2zM39.33 79.5c.54 0 1-.4 1.07-.96.32-2.86-.55-5.34-2.39-6.8-1.83-1.45-4.44-1.72-7.15-.74-2.03.73-3.84.58-5.11-.41-1.26-1-1.82-2.73-1.58-4.87a1.08 1.08 0 00-.94-1.2 1.08 1.08 0 00-1.19.95c-.32 2.87.54 5.35 2.38 6.8 1.84 1.45 4.44 1.72 7.15.75 2.04-.73 3.85-.58 5.12.41 1.25 1 1.82 2.73 1.57 4.87a1.08 1.08 0 001.07 1.2z'  stroke-width='1' stroke='none' fill='%23383737ff'/><path d='M6.7 27.57l18.65-5.83 5.84 18.64-18.65 5.84zm17.68-3.97l-15.8 4.96 4.94 15.8 15.81-4.95zm78.1-33.38l-9.04 3.62 3.62 9.05 9.04-3.62zm3.68 67.2l-9.67 2.99.57 1.86 9.67-3zM55.35 89.61l.7 1.74 12.14-4.87-.7-1.74zm5.28-48.27l1.32-.91-12.24-17.66-1.32.92zM2.4-9.78l-9.04 3.62 3.62 9.04L6.02-.74zm3.68 67.2l-9.67 3 .57 1.85 9.67-2.99zm96.4 32.88l-9.05 3.62 3.62 9.04 9.04-3.62zM2.4 90.3l-9.05 3.62 3.63 9.04 9.04-3.62z'   stroke-width='1' stroke='none' fill='%231c1c1cff'/></pattern></defs><rect width='800%' height='800%' transform='translate(-745,-455)' fill='url(%23a)'/></svg>")
+
+main
+    // background-color: $midthones
+.u-accent
+    color: $accent
+.u-accent-big
+    font-weight: 600
+    color: $accent
+
+
+
+.overlay
+    &--active
+        position: fixed
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-color: rgba(0,0,0,0.6) 
+        z-index: 10
+
+@mixin button-base
+    padding: 5px 10px
+    border-radius: 1px
+    color: #F5F5F5
+    cursor: pointer
+    border: none
+    background-color: #00000000
+
+    &--registration 
+        width: 50%
+    
+.button--primary
+    @include button-base
+    background-color: $highlight
+
+
+.button--secondary
+    @include button-base
+    background-color: #33333300
+    border: 1px solid #c0bebe
+
+.button--thridth
+    @include button-base
+    color: $font-color-primary
+    border: 1px solid $highlight
+
+.container
+    max-width: 1140px
+    margin: 0 auto
+    position: relative
+    
+   
+
+  
+
+.header
+    margin-bottom: 5px 
+    background-color: $shadow
+    position: sticky
+    height: 80px
+    top: 0px
+    z-index: 9
+    // &__links-container
+    &__title
+        position: absolute
+        top: 20px
+        font-size: 36px
+        
+    &__nav-menu 
+        height: 80px
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        transition: all 0.3s ease
+
+    &__nav-link
+        text-decoration: none
+        font-weight: bold
+        transition:  color 0.3s
+        margin-right: 10px
+        &:hover
+            color: $accent
+        &:active
+            color: $accent
+    &__profile
+        display: inline-block
+        position: relative
+        &:hover
+            .header__profile-options
+                display: flex
+                flex-direction: column
+    &__profile-options
+        display: none
+        position: absolute
+        padding-top: 10px
+        a 
+            margin-bottom: 10px
+            color: $font-color-primary
+            font-weight: 600
+                
+// Content
+.content
+    margin: 0 auto
+    position: relative
+
+    &__buttons-container
+        width: 100%
+        position: absolute 
+        bottom: 20px
+        left: 0
+        display: flex
+        justify-content: space-evenly
+        padding: 0 10px   
+
+    &__shop-page
+        display: flex
+        margin: 0 auto
+        width: 100%
+        height: 100%
+        gap: 5px
+
+    &__form-filter
+        width: 325px
+        height: 615px
+        background-color:  $shadow-item
+        transition: all 0.3s ease
+        border-radius: 2px
+        position: relative
+        display: flex
+        flex-direction: column
+        align-items: center
+        padding: 10px   
+
+    &__filter-fields
+        width: 100%
+        height: 100%
+        flex: 1 
+        overflow-y: auto 
+
+    &__catalog
+        margin: 0 auto
+        width: 805px
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(265px,  265px)) 
+        gap: 5px
+        justify-content: start
+        align-content: flex-start
+        align-items: flex-start
+
+// Product card
+.article
+    aspect-ratio: 1 / 1
+    background-color: $shadow-item
+    position: relative
+    transition: all 0.3s ease
+    box-shadow: 2px 2px 10px rgba(37, 37, 37, 0.5)
+
+    &:hover
+        background-color: $shadow
+        transform: scale(1.01)
+        .article__prev,
+        .article__next
+            opacity: 1
+                
+    &__brand-logo
+        position: absolute
+        top: 20px
+        left: 20px
+        width: 40%
+
+    &__product-name
+        position: absolute
+        bottom: 20px
+        left: 20px
+        font-weight: bold
+
+    &__release-year
+        position: absolute
+        top: 20px
+        right: 20px
+        
+
+    &__price
+        position: absolute
+        bottom: 60px
+        right: 20px
+
+    &__add-button
+        position: absolute
+        bottom: 20px
+        right: 20px
+
+    &__carousel
+        position: absolute
+        overflow: hidden
+        width: 45%
+        height: 80%
+        left: 50%
+        top: 50%
+        transform: translate(-50%, -50%)
+        &-item
+            position: absolute
+            top: 0
+            width: 100%
+            height: 100%
+            opacity: 0
+            transition: all 0.3s ease
+            &--active
+                opacity: 1
+            img 
+                display: block
+                width: 100%
+                height: 100%
+                object-fit: contain
+
+    &__buttons-container
+        position: absolute
+        width: 100%
+        height: 50%
+        left: 0
+        top: 50%
+        transform: translateY(-50%)
+        display: flex
+        justify-content: space-between
+
+    &__prev,
+    &__next
+        width: 50px
+        height: 100%
+        font-size: 25px
+        background: rgba(0, 0, 0, 0)
+        color: $font-color-primary
+        border: none
+        padding: 8px
+        cursor: pointer
+        opacity: 0
+        transition: all 0.3s ease
+        &:hover
+            transform: scale(1.25)
+            color: $highlight
+
+//                                                                                              Responsive
+
+@media (max-width: 1199px)
+    .container
+        width: 960px
+    .content
+        &__form-filter
+            width: 280px
+        &__catalog
+            width: 670px
+            grid-template-columns: repeat(auto-fit, minmax(220px,  220px)) 
+    .article
+        &__price
+            font-size: 14px
+
+
+
+@media (max-width: 991px)
+    .container
+        width: 720px
+    .content
+        &__form-filter
+            width: 40px
+            padding: 0
+            background-color: #33333300
+            &--active
+                padding: 10px
+                background-color: $shadow-item
+                width: 265px
+                height: 600px
+                
+        &__filter-fields
+            display: none
+            &--active
+                display: block
+        &__catalog
+            width: 670px
+            &--filter-active
+                width: 445px
+    .article
+        &__buttons-container
+            display: none
+
+
+@media (max-width: 767px)                    // MOBILE
+    .container
+        max-width: 540px
+
+    .header
+        z-index: 11
+
+        &__title
+            font-size: 28px
+            top: 25px
+            left: 30px
+
+        &__links-container 
+            max-height: 0
+            overflow: hidden
+            opacity: 0
+            position: absolute
+            top: 80px
+            transform: translateY(-20px)
+            display: flex
+            flex-direction: column
+            transition: all 0.3s ease
+            &--active 
+                max-height: 400px
+                opacity: 1
+
+
+        &__nav-link
+            font-size: 20px
+            padding: 20px 
+            opacity: 0
+            background-color: $shadow-item
+            transform: translateX(20px)
+            transition: all 0.3s ease
+            z-index: 11
+            &--active 
+                opacity: 1
+                transform: translateX(0)
+                transform: translateY(0)
+        &__profile-options
+            display: flex
+            flex-direction: column
+            position: relative
+            padding: 0
+            background: none
+
+            a 
+                margin-bottom: 0px
+
+        &__hamburger                                                                            // Humburger
+            width: 30px
+            height: 14px
+            right: 20px
+            margin-right: 20px
+            span
+                height: 2px
+                width: 100%
+                display: block
+                background: white
+                margin-bottom: 4px
+                &:last-child
+                    margin-bottom: none
+                transition: 0.3s all 
+
+            &--active
+                z-index: 11
+                span
+                    margin-bottom: -2px
+                    &:nth-child(1)
+                        transform: translateY(3px) rotate(-45deg)
+                    &:nth-child(2)
+                        display: none
+                    &:nth-child(3)
+                        transform: translateY(3px) rotate(45deg)
+
+
+    .content
+        &__form-filter
+            &--active
+                position: relative
+                top: 0px
+                width: 285px
+                height: 600px
+                border-radius: 1px
+    
+
+        &__catalog
+            width: 445px
+            &--filter-active
+                width: 220px
+
+    .article
+        &__price
+            font-size: 12px
+
+
+@media (max-width: 575px)
+
+    .container
+        width: 100%
+
+    .content
+        &__shop-page
+            width: 320px
+            flex-direction: column
+            align-items: flex-start
+
+        &__filter-resize
+            align-self: start
+
+        &__form-filter
+            width: fit-content
+            height: fit-content
+            gap: 10px
+
+            &--active
+                top: 0px
+                left: 0px
+                height: 420px
+                width: 100%
+
+        &__catalog
+            width: fit-content
+            position: relative
+            display: flex
+            flex-direction: column
+            align-items: center
+            
+    .article
+        width: 320px
+        height: 140px
+
+        &__carousel
+            height: 80%
+
+
+
+
+/// REGISTRATION--START
+
+.registration
+    display: flex
+
+    flex-direction: row
+    gap: 10px
+    align-items: flex-start 
+    &__description
+        max-width: 600px
+        padding: 15px 20px
+        border-radius: 8px
+        font-size: 14px
+        line-height: 1.4
+        color: aliceblue
+
+        p
+            font-size: 18px
+            margin: 0
+
+        strong
+            font-weight: 600
+            color: $accent
+
+        hr
+            border: none
+            border-top: 2px solid $shadow-item
+            margin: 10px 0
+            width: 100%
+    &__form
+        display: grid
+        grid-template-columns: 1fr 1fr
+        gap: 10px
+        margin: 0 auto
+        // width: 100%
+        width-max: 480px
+        &--login
+            grid-template-columns: 1fr 
+            width: 300px
+
+
+    &__options
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+
+    &__group
+        display: flex
+        flex-direction: column
+        margin-bottom: 5px
+
+    &__label
+        margin-bottom: 5px
+        font-size: 14px
+        font-weight: 500
+    &__buttons
+        display: flex
+        justify-content: space-between
+    &__input
+        padding: 10px
+        border: 1px solid #ccc
+        background-color: $shadow-item
+        border-radius: 4px
+        font-size: 14px
+        transition: border 0.2s
+        color: aliceblue
+
+        &:focus
+            border-color: $accent
+            background-color: $shadow
+            outline: none
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 767px)  
+    .registration
+        flex-wrap: wrap
+@media (max-width: 575px)
+    .registration
+        flex-direction: column
+        &__buttons
+            width: 100%
+
+        &__form
+            grid-template-columns: 1fr 
+
+
+
+    .content
+        &__shop-page
+            width: 320px
+            flex-direction: column
+            align-items: flex-start
+
+
+
+/// REGISTRATION--END

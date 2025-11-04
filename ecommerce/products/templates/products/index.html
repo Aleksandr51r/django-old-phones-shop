@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load product_card %} 
+
+{% block content %}
+<div class="content__shop-page">
+    <div class="content__form-filter">
+        <div class="content__filter-resize button--secondary"><span>Filter</span></div>
+
+        <form class="content__filter-fields">
+            <div class="content__field-wrapper">
+                <div class="content__field-name"><span>{{ form.brand.label }}</span></div> 
+                <div class="content__brand-wrapper">
+                    {% for checkbox in form.brand %}
+                        <label class="content__brand-label">
+                            {{ checkbox.tag }}
+                            {{ checkbox.choice_label }}
+                        </label>
+                    {% endfor %}
+                </div>  
+            </div>  
+            <div class="content__field-wrapper">
+                <label class="content__field-name">Release year:
+                </label>
+                <span id="year-value">----</span>
+                {{ form.release_year }}
+            </div>
+            
+            <div class="content__buttons-container ">
+                <button type="reset" class="button--secondary">Reset</button>
+                <button type="submit" class="button--primary">Submit</button>
+            </div>
+        </form>  
+        
+
+    </div>  
+    <div class="content__catalog">
+        {% if products %} 
+            {% for prod in products %} 
+                {% get_product_card prod %}
+            {% endfor %}
+        {% else %}
+            <p>Nothing founded</p>
+        {% endif %}
+    </div>
+    <script>
+        const slider = document.getElementById('id_release_year');
+        const output = document.getElementById('year-value');
+        output.textContent = slider.value;
+        slider.oninput = function() {
+            output.textContent = this.value;
+        };
+</script>
+</div>
+It is {% now "jS F Y H:i:s" %} 
+{% endblock %}

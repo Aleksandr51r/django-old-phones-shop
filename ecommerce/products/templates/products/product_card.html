@@ -1,0 +1,37 @@
+<article class="article">
+    <a
+        class="article__product-card"
+        href="{% url 'products:product_page' product.slug %}"
+    >
+        <img
+            class="article__brand-logo"
+            src="{{product.brand.brand_logo.url }}"
+        />
+
+        <h3 class="article__product-name"><i>{{ product.name }}</i></h3>
+
+        <div class="article__carousel">
+            {% for img in product.images.all %}
+            <div
+                class="article__carousel-item {% if img.is_main %}article__carousel-item--active{% endif %}"
+            >
+                <img src="{{ img.image.url }}" alt="{{ img.alt_text }}" />
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="article__product-info product-info">
+            <p class="article__release-year">
+                <span>{{ product.release_year }}</span>
+            </p>
+            <p class="article__price">
+                <span>{{ product.price }} $</span>
+            </p>
+        </div>
+    </a>
+    <a class="article__add-button button--primary" href="{% url 'cart:add_cartitem' product.id %}">Add</a>
+    <div class="article__buttons-container">
+        <button class="article__prev">&#10094;</button>
+        <button class="article__next">&#10095;</button>
+    </div>
+</article>

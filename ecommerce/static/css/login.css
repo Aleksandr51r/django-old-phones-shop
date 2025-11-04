@@ -1,0 +1,10 @@
+@media (max-width: 575px) {
+  .registration {
+    width: 90%;
+  }
+  .content__shop-page {
+    width: 320px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}/*# sourceMappingURL=login.css.map */

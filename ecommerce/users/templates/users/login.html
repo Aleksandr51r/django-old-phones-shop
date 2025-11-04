@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<div>
+        {% if messages or form.non_field_errors %}
+            <div class="alert
+            {% if messages %} alert-success {% else %} alert-warning {% endif %}
+                alert-dismissible fade show" role="alert"
+                    style="margin-top: 50px;">
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% else %}
+                    {{ form.non_field_errors }}
+                {% endif %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
+    <form
+    method="post"
+    class="registration__form registration__form--login"
+    action="{% url 'users:login' %}"
+    >
+    {% csrf_token %}
+    
+    <div class="registration__group registration__group--login">
+        <label for="registration__email" class="registration__label"
+        >Username</label
+        >
+        {{ form.username }}
+    </div>
+    <div class="registration__group registration__group--login">
+        <label for="registration__password1" class="registration__label"
+        >Password</label
+        >
+        {{ form.password }}
+    </div>
+    <div class="registration__options">
+        <div><span>Remember me?</span></div>
+        <a href="{% url 'users:registration' %}" class="u-accent"
+        >Don't registred?</a
+        >
+    </div>
+    <div class="registration__buttons">
+        <button type="reset" class="button--secondary">Reset</button>
+        <button type="submit" class="button--primary">Submit</button>
+    </div>
+</form>
+</div>
+{% endblock %}

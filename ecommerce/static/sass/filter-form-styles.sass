@@ -1,0 +1,100 @@
+$shadow: #0A0A0A
+$shadow-item: #141414
+$midthones: #292929
+$highlight: #028e7a 
+$accent:   #FFD740
+$font-color-primary: aliceblue
+.content
+    &__field-wrapper
+        display: flex
+        flex-direction: column
+        width: 100%
+        margin-bottom: 25px
+    &__brand-wrapper
+        display: flex
+        flex-direction: column
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        gap: 5px
+    &__field-name
+        width: 100%
+        padding-bottom: 3px
+        margin-bottom: 10px
+        border-bottom: 1px solid #BFBFBF
+    &__brand-checkbox
+        appearance: none
+        width: 16px
+        height: 16px
+        border: 1px solid #BFBFBF
+        border-radius: 3px
+        margin-right: 10px
+        background-color: #888888
+        transition: background-color 0.2s, border-color 0.2s
+        position: relative
+        cursor: pointer
+        &:checked 
+            // background-color: #333333
+            border-color: #222222
+        &::after
+            content: ''
+            position: absolute
+            top: 50%
+            left: 50%
+            width: 8px
+            height: 8px
+            background-color: #333333
+            border-radius: 3px 
+            transform: translate(-50%, -50%) scale(0)
+            transition: transform 0.2s ease-in-out
+        &:checked::after
+            transform: translate(-50%, -50%) scale(1)
+        &:focus 
+            outline: none
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.2)
+    &__year-slider
+        width: 100%
+        height: 6px
+        appearance: none
+        background: linear-gradient(to right, #888, $highlight)
+        border-radius: 5px
+        outline: none
+        cursor: pointer
+        margin-bottom: 5px
+
+        &::-webkit-slider-thumb
+            appearance: none
+            width: 18px
+            height: 18px
+            border-radius: 50%
+            background: $shadow
+            border: 2px solid white
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3)
+            transition: background 0.2s
+
+        &::-webkit-slider-thumb:hover
+            background: #0056b3
+
+        &::-moz-range-thumb
+            width: 18px
+            height: 18px
+            border-radius: 50%
+            background: #007bff
+            border: 2px solid white
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3)
+            transition: background 0.2s
+
+        &::-moz-range-track
+            background: linear-gradient(to right, #888, #007bff)
+            height: 6px
+            border-radius: 5px
+#year-value
+    margin-bottom: 10px
+
+//  form.content
+    //div__field-wrapper
+        // div__brand-wrapper
+            //  span
+            //  div__brand-checkbox
+                // div
+                    // label
+                        // input__brand-checkbox

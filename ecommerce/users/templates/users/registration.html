@@ -1,0 +1,86 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<div class="content registration">
+    <div class="registration__description">
+        <p>
+            This is an <strong>academic</strong> project,
+            <br />so you<strong> don't need to use real </strong> credentials.
+            <hr />
+            However, <strong>  email verification works correctly</strong>, so you can test this
+            feature.
+        </p>
+    </div>
+    <form
+        method="post"
+        class="registration__form"
+        action="{% url 'users:registration' %}"
+    >
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                {% for error in form.non_field_errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="registration__group">
+            <label for="registration__first_name" class="registration__label"
+                >First Name</label
+            >
+            {{ form.first_name }}
+        </div>
+
+        <div class="registration__group">
+            <label
+                for="{{ form.last_name.id_for_label }}"
+                class="registration__label"
+                >Last Name</label
+            >
+            {{ form.last_name }}
+        </div>
+
+        <div class="registration__group">
+            <label for="registration__username" class="registration__label"
+                >Username</label
+            >
+            {{ form.username }}
+        </div>
+
+        <div class="registration__group">
+            <label for="registration__email" class="registration__label"
+                >Email</label
+            >
+            {{ form.email }}
+        </div>
+
+        <div class="registration__group">
+            <label for="registration__password1" class="registration__label">Password</label>
+            {{ form.password1 }}
+            {% for error in form.password1.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="registration__group">
+            <label for="registration__password2" class="registration__label">Confirm Password</label>
+            {{ form.password2 }}
+            {% for error in form.password2.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="registration__group registration__buttons">
+            <button type="reset" class="button--secondary">Reset</button>
+        </div>
+        <div class="registration__group registration__buttons">
+            <button type="submit" class="button--primary">Submit</button>
+        </div>
+        <div class="registration__group">
+            <a href="{% url 'users:login' %}" class="u-accent">Back to login</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
